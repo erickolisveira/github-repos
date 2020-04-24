@@ -65,13 +65,35 @@ export default styles = StyleSheet.create({
   },
   repositorieBox: {
     width: '100%',
-    height: 100,
-    backgroundColor: 'white',
+    flexDirection: 'row',
     alignItems: 'center',
+    height: 110,
+    backgroundColor: 'white',
     borderRadius: 8,
     elevation: 2,
     marginBottom: 5,
     borderTopWidth: 8,
-    borderTopColor: 'black'
+    borderTopColor: 'black',
+    padding: 10
+  },
+  yourRepositories: {
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom: 10,
+  },
+  repositorieInfo: {
+    flex: 1
+  },
+  repositorieName: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 5
+  },
+  repositorieDescription: {
+    marginBottom: 5
+  },
+  repositorieLanguage: {
+
   }
 })

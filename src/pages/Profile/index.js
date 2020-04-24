@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import RepoColorPicker from '../../utils/RepoColorPicker'
 
@@ -35,9 +35,17 @@ function Repositorie({ repo }) {
 
   return (
     <View style={[styles.repositorieBox, { borderTopColor: RepoColorPicker(repo.language)}]}>
-      <Text>{repo.name}</Text>
-      <Text>{repo.description}</Text>
-      <Text>{repo.language}</Text>
+      <View style={styles.repositorieInfo}>
+        <Text style={styles.repositorieName}>{repo.name}</Text>
+        <Text style={styles.repositorieDescription}>{repo.description}</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ marginRight: 3, width: 10, height: 10, borderRadius: 100, backgroundColor: RepoColorPicker(repo.language)}} />
+          <Text>{repo.language}</Text>
+        </View>
+      </View>
+      <TouchableOpacity>
+        <MaterialIcons  name="chevron-right" size={38} color="gray" />
+      </TouchableOpacity>
     </View>
   )
 }
@@ -57,8 +65,12 @@ export default function Profile({ navigation, route }) {
   return (
     <View style={styles.container}>
       <ProfileBox user={params}/>
-      <Text>Repositórios de {params.name}</Text>
-      {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
+      <View style={styles.yourRepositories}>
+        <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
+      </View>
+      <ScrollView style={{width: '100%'}}showsVerticalScrollIndicator={false}>
+        {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
+      </ScrollView>
     </View>
   );
 }
