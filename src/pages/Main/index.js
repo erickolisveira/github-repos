@@ -3,7 +3,6 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
 import styles from './styles'
-import userTemp from './temp'
 
 function ProfileBox({ user, navigation }) {
   return (
@@ -34,9 +33,9 @@ export default function Main({ navigation }) {
   const [user, setUser] = useState({}) 
 
   async function searchUser(){
-    //const getUsers = await fetch(`https://api.github.com/users/${search}`)
-    //const user = await getUsers.json()
-    setUser(userTemp)
+    const getUsers = await fetch(`https://api.github.com/users/${search}`)
+    const userJson = await getUsers.json()
+    setUser(userJson)
   }
   
   return (
