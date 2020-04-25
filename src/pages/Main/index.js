@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
 import styles from './styles'
@@ -24,7 +24,7 @@ function ProfileBox({ user, navigation }) {
   )
 }
 
-function WelcomeMessage() {
+function ProfileNotFound() {
   return (
     <>
       <Image style={styles.imageLogo} source={require('../../assets/Octocat.png')} />
@@ -33,24 +33,18 @@ function WelcomeMessage() {
   )
 }
 
-function ErrorMessage() {
-  return (
-    <Text>Usuário não encontrado!</Text>
-  )
-}
-
 export default function Main({ navigation }) {
   const [search, setSearch] = useState('')
   const [user, setUser] = useState({}) 
-  const [isLoading, setIsLoading] = useState(false)
 
   async function searchUser(){
-    setIsLoading(true)
     const getUsers = await fetch(`https://api.github.com/users/${search}`)
     const userJson = await getUsers.json()
+    if(userJson.message === 'Not Found'){
+      console.log('Usuário não encontrado!')
+    }
     console.log(userJson)
-    setUser(userJson) 
-    setIsLoading(false)
+    setUser(userJson)
   }
   
   return (
@@ -65,10 +59,7 @@ export default function Main({ navigation }) {
           <MaterialIcons style={styles.searchIcon} name="chevron-right" size={32} color="gray" />
         </TouchableOpacity>
       </View>
-        { isLoading ? <ActivityIndicator size="large" color="black"/> 
-            : user.login ? <ProfileBox user={user} navigation={navigation} /> 
-            : user.message ? <ErrorMessage /> 
-            : <WelcomeMessage /> }
+        { user.login ? <ProfileBox user={user} navigation={navigation}/> : <ProfileNotFound /> }
       </View>
   )
 }
