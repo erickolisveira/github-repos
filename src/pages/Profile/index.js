@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import RepoColorPicker from '../../utils/RepoColorPicker'
@@ -62,11 +62,14 @@ function Repositorie({ repo }) {
 export default function Profile({ navigation, route }) {
   const { params } = route
   const [repos, setRepos] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     async function getRepos() {
+      setIsLoading(true)
       let repositories = await fetch(params.repos_url)
       repositories = await repositories.json()
+      setIsLoading(false)
       setRepos(repositories)
     } 
     getRepos()
@@ -78,7 +81,8 @@ export default function Profile({ navigation, route }) {
         <View style={styles.yourRepositories}>
           <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
         </View>
-          {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
+          { isLoading ? <ActivityIndicator size="large" color="black"/> 
+            : repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
       </View>
     </ScrollView>
   )
