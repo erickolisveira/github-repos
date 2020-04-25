@@ -25,7 +25,7 @@ function ProfileBox({ user }) {
       </View>
       <View style={styles.profileLocationBox}>
         <MaterialCommunityIcons name="map-marker" size={20} color="gray" />
-        <Text style={styles.profileLocationText}>{user.location}</Text>
+        <Text style={styles.profileLocationText}>{user.location || 'Sem localização'}</Text>
       </View>
     </View>
   )
@@ -82,6 +82,7 @@ export default function Profile({ navigation, route }) {
           <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
         </View>
           { isLoading ? <ActivityIndicator size="large" color="black"/> 
+            : repos.length === 0 ? <Text>Usuário sem repositórios</Text> 
             : repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
       </View>
     </ScrollView>
