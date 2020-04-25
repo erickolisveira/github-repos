@@ -7,7 +7,7 @@ import styles from './styles'
 function ProfileBox({ user, navigation }) {
 
   if(user.bio === null){
-    user.bio = "<Usuário sem bio>"
+    user.bio = "< Usuário sem bio >"
   }
 
   return (
