@@ -41,7 +41,7 @@ function Repositorie({ repo }) {
   if(repo.description === null){
     repo.description = <NoDescription />
   }
-  
+
   return (
     <View style={[styles.repositorieBox, { borderTopColor: RepoColorPicker(repo.language)}]}>
       <View style={styles.repositorieInfo}>
@@ -72,14 +72,12 @@ export default function Profile({ navigation, route }) {
     getRepos()
   }, [])
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <ProfileBox user={params}/>
       <View style={styles.yourRepositories}>
         <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
       </View>
-      <ScrollView style={{width: '100%'}}showsVerticalScrollIndicator={false}>
         {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
-      </ScrollView>
-    </View>
+    </ScrollView>
   );
 }
