@@ -6,6 +6,7 @@ const Stack = createStackNavigator()
 
 import Main from './pages/Main'
 import Profile from './pages/Profile'
+import Followers from './pages/Followers'
 
 function LogoTitle({ title }) {
   return (
@@ -34,6 +35,8 @@ export default function Routes() {
         options={{ headerTitle: () => <LogoTitle title="Buscar Dev"/> }} />
       <Stack.Screen name="Profile" component={Profile} 
         options={{ headerTitle: () => <LogoTitle title="Perfil"/> }} />
+      <Stack.Screen name="Followers" component={Followers}
+        options={{ headerTitle: () => <LogoTitle title="Seguidores"/> }} />
     </Stack.Navigator>
   );
 }
