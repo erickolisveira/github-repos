@@ -5,6 +5,11 @@ import { MaterialIcons } from '@expo/vector-icons'
 import styles from './styles'
 
 function ProfileBox({ user, navigation }) {
+
+  if(user.bio === null){
+    user.bio = "<Usuário sem bio>"
+  }
+
   return (
     <View style={styles.profileContainer}>
       <Image style={styles.profileImage} source={{ uri: user.avatar_url }}/>
@@ -35,6 +40,10 @@ export default function Main({ navigation }) {
   async function searchUser(){
     const getUsers = await fetch(`https://api.github.com/users/${search}`)
     const userJson = await getUsers.json()
+    if(userJson.message === 'Not Found'){
+      console.log('Usuário não encontrado!')
+    }
+    console.log(userJson)
     setUser(userJson)
   }
   
