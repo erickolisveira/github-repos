@@ -48,7 +48,6 @@ export default function Main({ navigation }) {
     setIsLoading(true)
     const getUsers = await fetch(`https://api.github.com/users/${search}`)
     const userJson = await getUsers.json()
-    console.log(userJson)
     setUser(userJson) 
     setIsLoading(false)
   }
