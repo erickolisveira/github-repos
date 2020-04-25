@@ -45,6 +45,7 @@ export default styles = StyleSheet.create({
   },
   profileSocialAtomBox: {
     alignItems: 'center',
+    padding: 5,
   },
   profileFollowText: {
     fontSize: 14,
