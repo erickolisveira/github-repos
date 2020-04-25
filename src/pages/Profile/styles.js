@@ -28,21 +28,25 @@ export default styles = StyleSheet.create({
   }, 
   profileSubUsername: {
     fontSize: 16, 
-    color: 'gray'
+    color: 'gray',
   },
   profileBio: {
+    alignItems: 'center', 
+    justifyContent: 'center',
+    paddingHorizontal: '10%',
+    flex: 1,
     marginTop: 10,
-    width: '80%',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   profileSocialInfoBox: {
-    width: '80%',
+    flex: 1,
+    width: '100%',
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-evenly',
-    marginTop: 20
   },
   profileSocialAtomBox: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   profileFollowText: {
     fontSize: 14,
@@ -53,11 +57,11 @@ export default styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   profileLocationBox: {
+    flex: 1,
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: -15,
-    marginTop: 10
   },
   profileLocationText: {
     fontSize: 16,

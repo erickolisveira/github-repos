@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -50,7 +50,7 @@ export default function Main({ navigation }) {
           <MaterialIcons style={styles.searchIcon} name="chevron-right" size={32} color="gray" />
         </TouchableOpacity>
       </View>
-      { user.login ? <ProfileBox user={user} navigation={navigation}/> : <ProfileNotFound /> }
+        { user.login ? <ProfileBox user={user} navigation={navigation}/> : <ProfileNotFound /> }
       </View>
   )
 }
