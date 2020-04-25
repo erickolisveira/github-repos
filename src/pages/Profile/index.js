@@ -73,11 +73,13 @@ export default function Profile({ navigation, route }) {
   }, [])
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <ProfileBox user={params}/>
-      <View style={styles.yourRepositories}>
-        <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
+      <View style={{flex: 1, padding: 10}}>
+        <ProfileBox user={params}/>
+        <View style={styles.yourRepositories}>
+          <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
+        </View>
+          {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
       </View>
-        {repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
     </ScrollView>
-  );
+  )
 }
