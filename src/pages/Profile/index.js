@@ -31,15 +31,24 @@ function ProfileBox({ user }) {
   )
 }
 
-function Repositorie({ repo }) {
+function NoDescription(){
+  return (
+    <Text>Repositório sem descrição!</Text>
+  )
+}
 
+function Repositorie({ repo }) {
+  if(repo.description === null){
+    repo.description = <NoDescription />
+  }
+  
   return (
     <View style={[styles.repositorieBox, { borderTopColor: RepoColorPicker(repo.language)}]}>
       <View style={styles.repositorieInfo}>
         <Text style={styles.repositorieName}>{repo.name}</Text>
-        <Text style={styles.repositorieDescription}>{repo.description}</Text>
+        <Text style={styles.repositorieDescription}>{repo.description.length > 150 ? repo.description.substring(0, 150).concat('...') : repo.description}</Text>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{ marginRight: 3, width: 10, height: 10, borderRadius: 100, backgroundColor: RepoColorPicker(repo.language)}} />
+          <View style={[ styles.repositorieLanguageCircle, { backgroundColor: RepoColorPicker(repo.language)}]} />
           <Text>{repo.language}</Text>
         </View>
       </View>

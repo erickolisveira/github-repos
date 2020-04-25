@@ -97,7 +97,10 @@ export default styles = StyleSheet.create({
   repositorieDescription: {
     marginBottom: 5
   },
-  repositorieLanguage: {
-
+  repositorieLanguageCircle: {
+    marginRight: 3,
+    width: 10,
+    height: 10,
+    borderRadius: 100,
   }
 })
