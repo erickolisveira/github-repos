@@ -4,17 +4,21 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    padding: 10
   },
   followerContainer: {
     width: '100%',
-    height: '10%',
+    height: 70,
     backgroundColor: 'white',
     elevation: 2,
-    marginBottom: 10,
+    marginBottom: 5,
     flexDirection: 'row',
     borderRadius: 8,
     alignItems: 'center',
+  },
+  flatList: {
+    flex: 1,
+    width: '100%',
+    padding: 10
   },
   followerImage: {
     width: '20%',
