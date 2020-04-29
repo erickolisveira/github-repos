@@ -4,6 +4,7 @@ import { View, Text, ActivityIndicator, Image, FlatList } from 'react-native';
 import styles from './styles';
 
 function FollowerBox({ user }) {
+  console.log(user)
   return (
     <View style={styles.followerContainer}>
       <Image style={styles.followerImage} source={{ uri: user.avatar_url }}/>
@@ -16,7 +17,7 @@ export default function Followers({ navigation, route }) {
   const [followers, setFollowers] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
 
   const { params } = route
   const user = params
@@ -34,11 +35,10 @@ export default function Followers({ navigation, route }) {
 
   async function getMoreData() {
     setPage(page+1)
-    console.log(page)
     setRefreshing(true)
     let _followers = await fetch(`${user.followers_url}?page=${page}`)
     _followers = await _followers.json()
-    setFollowers(followers.concat(_followers))
+    setFollowers([...followers, _followers])
     setRefreshing(false)
   }
 
@@ -47,10 +47,11 @@ export default function Followers({ navigation, route }) {
       { isLoading ? <ActivityIndicator size="large" color="black"/> 
         : <FlatList data={followers} 
             style={styles.flatList}
-            renderItem={follower  => <FollowerBox user={follower.item} />}
-            keyExtractor={ follower => follower.id }  
+            renderItem={ ({ item: follower }) => <FollowerBox user={follower} />}
+            keyExtractor={ follower => String(follower.id) }  
             refreshing={refreshing}
-            onRefresh={() => getMoreData()}
+            onEndReached={getMoreData}
+            onEndReachedThreshold={0.2}
           />
       }
     </View>
