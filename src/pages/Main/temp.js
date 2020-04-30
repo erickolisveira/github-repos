@@ -1,4 +1,4 @@
-export default user = {
+export default userJson = {
   "avatar_url": "https://avatars1.githubusercontent.com/u/26186645?v=4",
   "bio": "Estudante de Sistemas de Informação na Universidade Federal de Sergipe Estudante de Sistemas de Informação na Universidade Federal de Sergipe Esstudante",
   "blog": "",
