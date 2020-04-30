@@ -53,7 +53,7 @@ function Repositorie({ repo }) {
         <Text style={styles.repositorieDescription}>{repo.description.length > 150 ? repo.description.substring(0, 150).concat('...') : repo.description}</Text>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={[ styles.repositorieLanguageCircle, { backgroundColor: RepoColorPicker(repo.language)}]} />
-          <Text>{repo.language}</Text>
+          <Text style={styles.repositorieDescription}>{repo.language}</Text>
         </View>
       </View>
       <TouchableOpacity>
@@ -84,7 +84,7 @@ export default function Profile({ navigation, route }) {
       <View style={{flex: 1, padding: 10}}>
         <ProfileBox user={params} navigation={navigation}/>
         <View style={styles.yourRepositories}>
-          <Text style={[styles.profileUsername, { fontSize: 18 } ]}>Repositórios de {params.name || params.login}</Text>
+          <Text style={styles.profileUsername}>Repositórios de {params.name || params.login}</Text>
         </View>
           { isLoading ? <ActivityIndicator size="large" color="black"/> 
             : repos.length === 0 ? <Text>Usuário sem repositórios</Text> 

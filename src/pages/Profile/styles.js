@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { scaleFontSize } from '../../fonts/utils/ScaleFontSize'
 
 export default styles = StyleSheet.create({
   container: {
@@ -22,10 +23,10 @@ export default styles = StyleSheet.create({
   },
   profileUsername: {
     fontWeight: 'bold',
-    fontSize: 22,
+    fontSize: scaleFontSize(20),
   }, 
   profileSubUsername: {
-    fontSize: 16, 
+    fontSize: scaleFontSize(16), 
     color: 'gray',
   },
   profileBio: {
@@ -48,7 +49,7 @@ export default styles = StyleSheet.create({
     padding: 5,
   },
   profileFollowText: {
-    fontSize: 14,
+    fontSize: scaleFontSize(14),
     fontWeight: 'bold',
     color: 'gray'
   },
@@ -63,7 +64,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profileLocationText: {
-    fontSize: 16,
+    fontSize: scaleFontSize(16),
     marginLeft: 2
   },
   repositorieBox: {
@@ -90,11 +91,12 @@ export default styles = StyleSheet.create({
   },
   repositorieName: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: scaleFontSize(14),
     marginBottom: 5
   },
   repositorieDescription: {
-    marginBottom: 5
+    marginBottom: 5,
+    fontSize: scaleFontSize(12)
   },
   repositorieLanguageCircle: {
     marginRight: 3,
