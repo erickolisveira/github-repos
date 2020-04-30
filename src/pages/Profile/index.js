@@ -14,7 +14,7 @@ function ProfileBox({ user, navigation }) {
       <Text style={styles.profileSubUsername}>{user.login}</Text>
       <Text style={styles.profileBio}>{user.bio}</Text>
       <View style={styles.profileSocialInfoBox}>
-        <TouchableOpacity onPress={() => navigation.navigate('Following')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Following', user)}>
           <View style={styles.profileSocialAtomBox}>
             <Text style={styles.profileFollowText}>Seguindo</Text>
             <Text style={styles.profileFollowNumber}>{user.following}</Text>
