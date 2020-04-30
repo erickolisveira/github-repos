@@ -21,8 +21,6 @@ export default function Followers({ navigation, route }) {
   const { params } = route
   const user = params
 
-  console.log(page)
-
   useEffect(() => {
     async function _getData(){
       setIsLoading(true)
