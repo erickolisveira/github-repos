@@ -14,13 +14,13 @@ function ProfileBox({ user, navigation }) {
       <Text style={styles.profileSubUsername}>{user.login}</Text>
       <Text style={styles.profileBio}>{user.bio}</Text>
       <View style={styles.profileSocialInfoBox}>
-        <TouchableOpacity onPress={() => navigation.navigate('Following', user)}>
+        <TouchableOpacity onPress={() => navigation.push('Following', user)}>
           <View style={styles.profileSocialAtomBox}>
             <Text style={styles.profileFollowText}>Seguindo</Text>
             <Text style={styles.profileFollowNumber}>{user.following}</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Followers', user)}>
+        <TouchableOpacity onPress={() => navigation.push('Followers', user)}>
           <View style={styles.profileSocialAtomBox}>
             <Text style={styles.profileFollowText}>Seguidores</Text>
             <Text style={styles.profileFollowNumber}>{user.followers}</Text>
