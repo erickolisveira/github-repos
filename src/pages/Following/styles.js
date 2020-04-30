@@ -5,6 +5,12 @@ export default styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  followerInfo:{
+    flexDirection: 'row',
+    flex: 1,
+    height: '100%',
+    alignItems: 'center'
+  }, 
   followerContainer: {
     width: '100%',
     height: 70,
@@ -25,6 +31,7 @@ export default styles = StyleSheet.create({
     height: '80%',
     borderRadius: 100,
     resizeMode: 'contain',
+    marginHorizontal: 10
   },
   followerUsername: {
     fontWeight: 'bold'

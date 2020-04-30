@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Image, FlatList } from 'react-native';
+import { View, Text, ActivityIndicator, Image, FlatList, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons'
 
 import styles from './styles';
 
-function FollowingBox({ user }) {
+function FollowingBox({ user, navigation }) {
+
+  async function handleSelect(){
+    let followingUser = await fetch(`${user.url}`)
+    followingUser = await followingUser.json()
+    navigation.push('Profile', followingUser)
+  }
+
   return (
     <View style={styles.followerContainer}>
-      <Image style={styles.followerImage} source={{ uri: user.avatar_url }}/>
-      <Text style={styles.followerUsername}>{user.login}</Text>
+      <View style={styles.followerInfo}>
+        <Image style={styles.followerImage} source={{ uri: user.avatar_url }}/>
+        <Text style={styles.followerUsername}>{user.login}</Text>
+      </View>
+      <TouchableOpacity onPress={() => handleSelect()}>
+        <MaterialIcons  name="chevron-right" size={38} color="gray" />
+      </TouchableOpacity>
     </View>
   )
 }
@@ -44,7 +57,7 @@ export default function Following({ navigation, route }) {
       { isLoading ? <ActivityIndicator size="large" color="black"/> 
         : <FlatList data={following} 
             style={styles.flatList}
-            renderItem={ following => <FollowingBox user={following.item} />}
+            renderItem={ following => <FollowingBox user={following.item} navigation={navigation}/>}
             keyExtractor={ following => String(following.id) }  
             refreshing={refreshing}
             onEndReached={getData}
