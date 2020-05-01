@@ -10,8 +10,8 @@ import { Container,
   ProfileContainer, 
   ProfileImage, 
   ProfileInfo, 
-  Username, 
-  Description } from './styles'
+  Username,
+} from './styles'
 
 import userJson from './temp'
 
@@ -25,8 +25,12 @@ function ProfileBox({ user, navigation }) {
     <ProfileContainer>
       <ProfileImage source={{ uri: user.avatar_url }}/>
       <ProfileInfo>
-        <Username >{user.name || user.login}</Username>
-        <Description>{user.bio.length > 150 ? user.bio.substring(0, 100).concat('...') : user.bio }</Description>
+        <Username fontSize='16'>{user.name || user.login}</Username>
+        <BasicText>
+          { user.bio.length > 150 
+            ? user.bio.substring(0, 100).concat('...') 
+            : user.bio }
+        </BasicText>
       </ProfileInfo>
       <TouchableOpacity onPress={() => navigation.navigate('Profile', user)}>
           <MaterialIcons style={styles.searchIcon} name="chevron-right" size={32} color="gray" />
