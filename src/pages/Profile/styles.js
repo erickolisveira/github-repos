@@ -1,107 +1,94 @@
-import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
 import { scaleFontSize } from '../../fonts/utils/ScaleFontSize'
 
-export default styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  profileContainer: {
-    width: '100%',
-    height: 340,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    borderRadius: 8,
-    elevation: 2,
-    marginBottom: 10,
-  },
-  profileImage: {
-    width: '30%',
-    height: '30%',
-    borderRadius: 100,
-    resizeMode: 'contain',
-    marginVertical: 10
-  },
-  profileUsername: {
-    fontWeight: 'bold',
-    fontSize: scaleFontSize(20),
-  }, 
-  profileSubUsername: {
-    fontSize: scaleFontSize(16), 
-    color: 'gray',
-  },
-  profileBio: {
-    alignItems: 'center', 
-    justifyContent: 'center',
-    paddingHorizontal: '10%',
-    flex: 1,
-    marginTop: 10,
-    textAlign: 'center',
-  },
-  profileSocialInfoBox: {
-    flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  profileSocialAtomBox: {
-    alignItems: 'center',
-    padding: 5,
-  },
-  profileFollowText: {
-    fontSize: scaleFontSize(14),
-    fontWeight: 'bold',
-    color: 'gray'
-  },
-  profileFollowNumber: {
-    fontWeight: 'bold',
-  },
-  profileLocationBox: {
-    flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  profileLocationText: {
-    fontSize: scaleFontSize(16),
-    marginLeft: 2
-  },
-  repositorieBox: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 110,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    elevation: 2,
-    marginBottom: 5,
-    borderTopWidth: 8,
-    borderTopColor: 'black',
-    padding: 10
-  },
-  yourRepositories: {
-    width: '100%',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginBottom: 10,
-  },
-  repositorieInfo: {
-    flex: 1
-  },
-  repositorieName: {
-    fontWeight: 'bold',
-    fontSize: scaleFontSize(14),
-    marginBottom: 5
-  },
-  repositorieDescription: {
-    marginBottom: 5,
-    fontSize: scaleFontSize(12)
-  },
-  repositorieLanguageCircle: {
-    marginRight: 3,
-    width: 10,
-    height: 10,
-    borderRadius: 100,
-  }
-})
+export const ScrollViewContainer = styled.ScrollView`
+  flex: 1;
+`
+
+export const ViewContainer = styled.View`
+  padding: 10px 10px 10px;
+`
+
+export const ViewAlignLeft = styled.View`
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+`
+
+export const TextBase = styled.Text`
+  color: ${props => props.color ? props.color : '#000'};
+  font-weight: ${props => props.bold ? 'bold' : 'normal'};
+  font-size: ${props => props.fontSize ? scaleFontSize(props.fontSize) : 14}px;
+`
+
+export const ProfileContainer = styled.View`
+  width: 100%;
+  height: 340px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 8px;
+  elevation: 2;
+  margin-bottom: 10px;
+`
+
+export const ProfileImage = styled.Image`
+  width: 30%;
+  height: 30%;
+  border-radius: ${340/2}px;
+  resize-mode: contain;
+  margin: 10px 0 10px;
+`
+
+export const TextBio = styled(TextBase)`
+  padding: 0 10% 0 10%;
+  margin-top: 10px;
+  text-align: center;
+`
+
+export const ProfileSocialBox = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+`
+
+export const SocialBoxAtom = styled.View`
+  align-items: center;
+`
+
+export const ProfileLocationBox = styled(ProfileSocialBox)`
+  justify-content: center;
+`
+
+export const RepositoryContainer = styled.View`
+  width: 100%;
+  height: 110px;
+  align-items: center;
+  flex-direction: row;
+  background-color: #fff;
+  border-radius: 8px;
+  elevation: 2;
+  margin: 0 0 5px 0px;
+  border-top-width: 8px;
+  border-top-color: ${props => props.repoColor ? props.repoColor : '#000'};
+  padding: 10px;
+`
+
+export const RepositoryInfo = styled.View`
+  flex: 1;
+` 
+
+export const LanguageContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
+export const LanguageCircle = styled.View`
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: ${props => props.repoColor ? props.repoColor : '#000'};
+`

@@ -1,65 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import RepoColorPicker from '../../utils/RepoColorPicker'
 
-import styles from './styles';
+import { 
+  ScrollViewContainer,
+  ViewContainer,
+  ViewAlignLeft,
+  TextBase, 
+  TextBio, 
+  ProfileContainer, 
+  ProfileImage, 
+  ProfileSocialBox,
+  ProfileLocationBox,
+  SocialBoxAtom,
+  RepositoryContainer,
+  RepositoryInfo,
+  LanguageCircle,
+  LanguageContainer
+} from './styles'
 
 function ProfileBox({ user, navigation }) {
   return (
-    <View style={styles.profileContainer}>
-      <Image style={styles.profileImage} source={{ uri: user.avatar_url }} />
-      <Text style={styles.profileUsername}>{user.name || user.login}</Text>
-      <Text style={styles.profileSubUsername}>{user.login}</Text>
-      <Text style={styles.profileBio}>{user.bio}</Text>
-      <View style={styles.profileSocialInfoBox}>
+    <ProfileContainer>
+      <ProfileImage source={{ uri: user.avatar_url }} />
+      <TextBase bold fontSize='20'>{ user.name || user.login }</TextBase>
+      <TextBase color='gray' fontSize='16'>{ user.login }</TextBase>
+      <TextBio>{ user.bio }</TextBio>
+      <ProfileSocialBox>
         <TouchableOpacity onPress={() => navigation.push('Following', user)}>
-          <View style={styles.profileSocialAtomBox}>
-            <Text style={styles.profileFollowText}>Seguindo</Text>
-            <Text style={styles.profileFollowNumber}>{user.following}</Text>
-          </View>
+          <SocialBoxAtom>
+            <TextBase bold color='gray'>Seguindo</TextBase>
+            <TextBase bold>{ user.following }</TextBase>
+          </SocialBoxAtom>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.push('Followers', user)}>
-          <View style={styles.profileSocialAtomBox}>
-            <Text style={styles.profileFollowText}>Seguidores</Text>
-            <Text style={styles.profileFollowNumber}>{user.followers}</Text>
-          </View>
+          <SocialBoxAtom>
+            <TextBase bold color='gray'>Seguidores</TextBase>
+            <TextBase bold>{ user.followers }</TextBase>
+          </SocialBoxAtom>
         </TouchableOpacity>
-      </View>
-      <View style={styles.profileLocationBox}>
-        <MaterialCommunityIcons name="map-marker" size={20} color="gray" />
-        <Text style={styles.profileLocationText}>{user.location || 'Sem localização'}</Text>
-      </View>
-    </View>
+      </ProfileSocialBox>
+      <ProfileLocationBox>
+        <MaterialCommunityIcons name="map-marker" size={20} color='gray' />
+        <TextBase fontSize='16'>{ user.location || 'Sem localização' }</TextBase>
+      </ProfileLocationBox>
+    </ProfileContainer>
+
   )
 }
 
 function NoDescription(){
   return (
-    <Text>Repositório sem descrição!</Text>
+    <TextBase color='gray'>Repositório sem descrição!</TextBase>
   )
 }
 
-function Repositorie({ repo }) {
+function Repository({ repo }) {
   if(repo.description === null){
     repo.description = <NoDescription />
   }
 
+  let repoColor = RepoColorPicker(repo.language)
+
   return (
-    <View style={[styles.repositorieBox, { borderTopColor: RepoColorPicker(repo.language)}]}>
-      <View style={styles.repositorieInfo}>
-        <Text style={styles.repositorieName}>{repo.name}</Text>
-        <Text style={styles.repositorieDescription}>{repo.description.length > 150 ? repo.description.substring(0, 150).concat('...') : repo.description}</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={[ styles.repositorieLanguageCircle, { backgroundColor: RepoColorPicker(repo.language)}]} />
-          <Text style={styles.repositorieDescription}>{repo.language}</Text>
-        </View>
-      </View>
+    <RepositoryContainer repoColor={ repoColor }>
+      <RepositoryInfo>
+        <TextBase bold fontSize='16'>{ repo.name }</TextBase>
+        <TextBase color='gray'>
+          { repo.description.length > 150 
+            ? repo.description.substring(0, 150).concat('...') 
+            : repo.description }
+        </TextBase>
+        <LanguageContainer>
+          <LanguageCircle repoColor={ repoColor }/>
+          <TextBase>{ repo.language }</TextBase>
+        </LanguageContainer>
+      </RepositoryInfo>
       <TouchableOpacity>
-        <MaterialIcons  name="chevron-right" size={38} color="gray" />
+        <MaterialIcons name="chevron-right" size={38} color="gray" />
       </TouchableOpacity>
-    </View>
+    </RepositoryContainer>
   )
 }
 
@@ -80,16 +102,16 @@ export default function Profile({ navigation, route }) {
   }, [])
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={{flex: 1, padding: 10}}>
+    <ScrollViewContainer showsVerticalScrollIndicator={false}>
+      <ViewContainer>
         <ProfileBox user={params} navigation={navigation}/>
-        <View style={styles.yourRepositories}>
-          <Text style={styles.profileUsername}>Repositórios de {params.name || params.login}</Text>
-        </View>
+        <ViewAlignLeft>
+          <TextBase bold fontSize='20'>Repositórios de {params.name || params.login}</TextBase>
+        </ViewAlignLeft>
           { isLoading ? <ActivityIndicator size="large" color="black"/> 
-            : repos.length === 0 ? <Text>Usuário sem repositórios</Text> 
-            : repos.map(repo => <Repositorie key={repo.node_id} repo={repo}/>)}
-      </View>
-    </ScrollView>
+            : repos.length === 0 ? <TextBase>Usuário sem repositórios</TextBase> 
+            : repos.map(repo => <Repository key={repo.node_id} repo={repo}/>) }
+      </ViewContainer>
+    </ScrollViewContainer>
   )
 }
