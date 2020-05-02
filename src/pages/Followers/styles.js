@@ -1,32 +1,38 @@
-import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
 
-export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  followerContainer: {
-    width: '100%',
-    height: 70,
-    backgroundColor: 'white',
-    elevation: 2,
-    marginBottom: 5,
-    flexDirection: 'row',
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  flatList: {
-    flex: 1,
-    width: '100%',
-    padding: 10
-  },
-  followerImage: {
-    width: '20%',
-    height: '80%',
-    borderRadius: 100,
-    resizeMode: 'contain',
-  },
-  followerUsername: {
-    fontWeight: 'bold'
-  }
-})
+import { scaleFontSize } from '../../fonts/utils/ScaleFontSize'
+
+export const AppContainer = styled.View`
+  flex: 1;
+  padding: 5px 0px 0px 0px;
+`
+
+export const FollowInfo = styled.View`
+  flex-direction: row;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+`
+
+export const FollowContainer = styled.View`
+  height: 70px;
+  background-color: #fff;
+  elevation: 2;
+  flex-direction: row;
+  border-radius: 8px;
+  align-items: center;
+  margin: 0px 10px 5px 10px;
+`
+
+export const FollowImage = styled.Image`
+  width: 20%;
+  height: 80%;
+  border-radius: 100px;
+  resize-mode: contain;
+  margin: 0px 10px 0px 10px;
+`
+
+export const TextBold = styled.Text`
+  font-weight: bold;
+  font-size: ${scaleFontSize(14)}px;
+`

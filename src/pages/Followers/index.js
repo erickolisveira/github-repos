@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Image, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 
-import styles from './styles';
+import {
+  AppContainer,
+  FollowContainer,
+  FollowImage,
+  FollowInfo,
+  TextBold,
+} from './styles'
 
 function FollowerBox({ user }) {
   return (
-    <View style={styles.followerContainer}>
-      <Image style={styles.followerImage} source={{ uri: user.avatar_url }}/>
-      <Text style={styles.followerUsername}>{user.login}</Text>
-    </View>
+    <FollowContainer>
+      <FollowInfo>
+        <FollowImage source={{ uri: user.avatar_url }}/>
+        <TextBold>{ user.login }</TextBold>
+      </FollowInfo>
+    </FollowContainer>
   )
 }
 
@@ -40,10 +48,9 @@ export default function Followers({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <AppContainer>
       { isLoading ? <ActivityIndicator size="large" color="black"/> 
-        : <FlatList data={followers} 
-            style={styles.flatList}
+        : <FlatList data={followers}
             renderItem={ follower => <FollowerBox user={follower.item} />}
             keyExtractor={ follower => String(follower.id) }  
             refreshing={refreshing}
@@ -51,6 +58,6 @@ export default function Followers({ navigation, route }) {
             onEndReachedThreshold={1}
           />
       }
-    </View>
+    </AppContainer>
   );
 }
