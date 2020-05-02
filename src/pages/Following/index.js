@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Image, FlatList, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
-import styles from './styles';
+import {
+  AppContainer,
+  FollowContainer,
+  FollowImage,
+  FollowInfo,
+  TextBold,
+} from './styles'
 
 function FollowingBox({ user, navigation }) {
 
@@ -13,15 +19,15 @@ function FollowingBox({ user, navigation }) {
   }
 
   return (
-    <View style={styles.followerContainer}>
-      <View style={styles.followerInfo}>
-        <Image style={styles.followerImage} source={{ uri: user.avatar_url }}/>
-        <Text style={styles.followerUsername}>{user.login}</Text>
-      </View>
+    <FollowContainer>
+      <FollowInfo>
+        <FollowImage source={{ uri: user.avatar_url }}/>
+        <TextBold>{ user.login }</TextBold>
+      </FollowInfo>
       <TouchableOpacity onPress={() => handleSelect()}>
-        <MaterialIcons  name="chevron-right" size={38} color="gray" />
+        <MaterialIcons name="chevron-right" size={38} color="gray" />
       </TouchableOpacity>
-    </View>
+    </FollowContainer>
   )
 }
 
@@ -42,7 +48,7 @@ export default function Following({ navigation, route }) {
     }
     _getData()
   }, [])
-
+  
   async function getData() {
     setRefreshing(true)
     let _following = await fetch(`https://api.github.com/users/${user.login}/following?page=${page}`)
@@ -53,10 +59,10 @@ export default function Following({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <AppContainer>
       { isLoading ? <ActivityIndicator size="large" color="black"/> 
-        : <FlatList data={following} 
-            style={styles.flatList}
+        : <FlatList showsVerticalScrollIndicator={false}
+            data={following}
             renderItem={ following => <FollowingBox user={following.item} navigation={navigation}/>}
             keyExtractor={ following => String(following.id) }  
             refreshing={refreshing}
@@ -64,6 +70,6 @@ export default function Following({ navigation, route }) {
             onEndReachedThreshold={1}
           />
       }
-    </View>
+    </AppContainer>
   );
 }
