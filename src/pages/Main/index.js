@@ -33,7 +33,7 @@ function ProfileBox({ user, navigation }) {
         </BasicText>
       </ProfileInfo>
       <TouchableOpacity onPress={() => navigation.navigate('Profile', user)}>
-          <MaterialIcons style={styles.searchIcon} name="chevron-right" size={32} color="gray" />
+          <MaterialIcons name="chevron-right" size={32} color="gray" />
       </TouchableOpacity>
     </ProfileContainer>
   )
@@ -42,7 +42,7 @@ function ProfileBox({ user, navigation }) {
 function WelcomeMessage() {
   return (
     <>
-      <Logo style={styles.imageLogo} source={require('../../assets/Octocat.png')} />
+      <Logo source={require('../../assets/Octocat.png')} />
       <BasicText>Pesquise um usuário no github para ver seus repositórios!</BasicText>
     </>
   )
