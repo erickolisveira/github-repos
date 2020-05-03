@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons'
 
 import {
   AppContainer,
@@ -9,13 +10,23 @@ import {
   TextBold,
 } from './styles'
 
-function FollowerBox({ user }) {
+function FollowerBox({ user, navigation }) {
+
+  async function handleSelect(){
+    let followerUser = await fetch(`${user.url}`)
+    followerUser = await followerUser.json()
+    navigation.push('Profile', followerUser)
+  }
+
   return (
     <FollowContainer>
       <FollowInfo>
         <FollowImage source={{ uri: user.avatar_url }}/>
         <TextBold>{ user.login }</TextBold>
       </FollowInfo>
+      <TouchableOpacity onPress={() => handleSelect()}>
+        <MaterialIcons name="chevron-right" size={38} color="gray" />
+      </TouchableOpacity>
     </FollowContainer>
   )
 }
@@ -51,7 +62,7 @@ export default function Followers({ navigation, route }) {
     <AppContainer>
       { isLoading ? <ActivityIndicator size="large" color="black"/> 
         : <FlatList data={followers}
-            renderItem={ follower => <FollowerBox user={follower.item} />}
+            renderItem={ follower => <FollowerBox user={follower.item} navigation={navigation} />}
             keyExtractor={ follower => String(follower.id) }  
             refreshing={refreshing}
             onEndReached={getData}
