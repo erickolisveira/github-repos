@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'
+import { ActivityIndicator, FlatList } from 'react-native'
+
+import { ChevronButton } from '../../components/'
 
 import {
   AppContainer,
@@ -24,21 +25,18 @@ function FollowerBox({ user, navigation }) {
         <FollowImage source={{ uri: user.avatar_url }}/>
         <TextBold>{ user.login }</TextBold>
       </FollowInfo>
-      <TouchableOpacity onPress={() => handleSelect()}>
-        <MaterialIcons name="chevron-right" size={38} color="gray" />
-      </TouchableOpacity>
+      <ChevronButton onPress={() => handleSelect()}/>
     </FollowContainer>
   )
 }
 
-export default function Followers({ navigation, route }) {
+export default function Followers(props) {
+  const { route: { params: user }, navigation } = props
+
   const [followers, setFollowers] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [page, setPage] = useState(1)
-
-  const { params } = route
-  const user = params
 
   useEffect(() => {
     async function _getData(){
