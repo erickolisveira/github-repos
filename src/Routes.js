@@ -4,10 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
 
-import Main from './pages/Main'
-import Profile from './pages/Profile'
-import Followers from './pages/Followers'
-import Following from './pages/Following'
+import Main from './screens/Main'
+import Profile from './screens/Profile'
+import Followers from './screens/Followers'
+import Following from './screens/Following'
 
 function LogoTitle({ title }) {
   return (
