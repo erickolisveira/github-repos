@@ -4,15 +4,15 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
 
-import Main from './screens/Main'
-import Profile from './screens/Profile'
-import Followers from './screens/Followers'
-import Following from './screens/Following'
+import Main from '../screens/Main'
+import Profile from '../screens/Profile'
+import Followers from '../screens/Followers'
+import Following from '../screens/Following'
 
 function LogoTitle({ title }) {
   return (
     <View style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-      <Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('./assets/GitHub-Mark-Light-120px-plus.png')}/>
+      <Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../assets/GitHub-Mark-Light-120px-plus.png')}/>
       <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>{title}</Text>
     </View>
   )
