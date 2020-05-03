@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 
+import { Api } from '../../services'
+
 import {
   AppContainer,
   FollowContainer,
@@ -13,8 +15,7 @@ import {
 function FollowerBox({ user, navigation }) {
 
   async function handleSelect(){
-    let followerUser = await fetch(`${user.url}`)
-    followerUser = await followerUser.json()
+    const followerUser = await Api.getUser(user.login)
     navigation.push('Profile', followerUser)
   }
 
@@ -51,10 +52,9 @@ export default function Followers({ navigation, route }) {
 
   async function getData() {
     setRefreshing(true)
-    let _followers = await fetch(`${user.followers_url}?page=${page}`)
-    _followers = await _followers.json()
-    setFollowers(followers.concat(_followers))
-    setPage(page+1)
+    const followersInfo = await Api.getSocialInfoFromPage(user.followers_url, page)
+    setFollowers(followers.concat(followersInfo))
+    setPage(page + 1)
     setRefreshing(false)
   }
 
