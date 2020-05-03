@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native'
 
+import { Api } from '../../services'
+
 import ProfileBox from './ProfileBox'
 import Repository from './Repository'
 
@@ -19,10 +21,9 @@ export default function Profile(props) {
   useEffect(() => {
     async function getRepos() {
       setIsLoading(true)
-      let repositories = await fetch(user.repos_url)
-      repositories = await repositories.json()
-      setIsLoading(false)
+      const repositories = await Api.getRepositories(user.repos_url)
       setRepos(repositories)
+      setIsLoading(false)
     } 
     getRepos()
   }, [])

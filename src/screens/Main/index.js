@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native'
 
+import { Api } from '../../services'
+
 import { ChevronButton } from '../../components'
 import { 
   Container, 
@@ -61,9 +63,8 @@ export default function Main({ navigation }) {
 
   async function searchUser(){
     setIsLoading(true)
-    const getUsers = await fetch(`https://api.github.com/users/${search}`)
-    const userJson = await getUsers.json()
-    setUser(userJson) 
+    const userInfo = await Api.getUser(search)
+    setUser(userInfo) 
     setIsLoading(false)
   }
   
