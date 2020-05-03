@@ -1,6 +1,8 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 
+import SocialContainerButton from './SocialContainerButton'
+
 import {
   Text,
   TextBio, 
@@ -9,10 +11,14 @@ import {
   ProfileSocialBox,
   ProfileLocationBox,
   MapMarker,
-  SocialBoxAtom,
 } from './styles'
 
-export default function ProfileBox({ user, navigation }) {
+export default function ProfileBox(props) {
+  const { user, navigation } = props
+  
+  const navigateFollowing = () => navigation.push('Following', user)
+  const navigateFollowers = () => navigation.push('Followers', user)
+
   return (
     <ProfileContainer>
       <ProfileImage source={{ uri: user.avatar_url }} />
@@ -20,24 +26,20 @@ export default function ProfileBox({ user, navigation }) {
       <Text color='gray' fontSize='16'>{ user.login }</Text>
       <TextBio>{ user.bio }</TextBio>
       <ProfileSocialBox>
-        <TouchableOpacity onPress={() => navigation.push('Following', user)}>
-          <SocialBoxAtom>
-            <Text bold color='gray'>Seguindo</Text>
-            <Text bold>{ user.following }</Text>
-          </SocialBoxAtom>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.push('Followers', user)}>
-          <SocialBoxAtom>
-            <Text bold color='gray'>Seguidores</Text>
-            <Text bold>{ user.followers }</Text>
-          </SocialBoxAtom>
-        </TouchableOpacity>
+        <SocialContainerButton 
+          onPress={() => navigateFollowing()} 
+          mainText='Seguindo'
+          followNumber={ user.following }/>
+        <SocialContainerButton
+          onPress={() => navigateFollowers()}
+          mainText='Seguidores'
+          followNumber={ user.followers }
+          />
       </ProfileSocialBox>
       <ProfileLocationBox>
         <MapMarker />
         <Text fontSize='16'>{ user.location || 'Sem localização' }</Text>
       </ProfileLocationBox>
     </ProfileContainer>
-
   )
 }
