@@ -28,12 +28,17 @@ export const SearchBarContainer = styled.View`
   margin-bottom: 10px;
 `
 
-export const SearchInput = styled.TextInput`
+export const SearchInput = styled.TextInput.attrs({
+  style: {
+    fontFamily: 'Lato-Bold',
+  }
+})`
   flex: 1;
   padding-left: 10px;
 `
 
 export const BasicText = styled.Text`
+  font-family: 'Lato-Regular';
   font-size: ${props => props.fontSize ? scaleFontSize(props.fontSize) : scaleFontSize(14)}px;
 `
 
