@@ -18,8 +18,31 @@ async function getSocialInfoFromPage(socialUrl, page){
   return socialInfo
 }
 
+async function getRepoLastCommit() {
+  let repoLastCommit = await fetch('https://api.github.com/repos/Eldeerick/github-repos/commits')
+  repoLastCommit = await repoLastCommit.json()
+  await getRepositoryTree(repoLastCommit[0].commit.tree.url)
+}
+
+async function getRepositoryTree(treeUrl) {
+  let localNode = await fetch(treeUrl)
+  localNode = await localNode.json() 
+  
+  localNode.tree.map(node => {
+    if(node.type === 'blob'){
+      console.log(node.path)
+    }
+    if(node.type === 'tree'){
+      getRepositoryTree(node.url)
+      console.log(node.path + ' -> ')
+    }
+  })
+  
+}
+
 module.exports = {
   getUser,
   getRepositories,
   getSocialInfoFromPage,
+  getRepoLastCommit,
 }
