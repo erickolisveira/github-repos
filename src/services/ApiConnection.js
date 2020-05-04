@@ -30,10 +30,11 @@ async function getRepositoryTree(treeUrl) {
   
   localNode.tree.map(node => {
     if(node.type === 'blob'){
-      console.log('File: ' + node.path)
+      console.log(node.path)
     }
     if(node.type === 'tree'){
-      console.log('Folder: ' + node.path)
+      getRepositoryTree(node.url)
+      console.log(node.path + ' -> ')
     }
   })
   
