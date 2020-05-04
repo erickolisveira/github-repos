@@ -4,10 +4,13 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
 
-import Main from '../screens/Main'
-import Profile from '../screens/Profile'
-import Followers from '../screens/Followers'
-import Following from '../screens/Following'
+import { 
+  Main,
+  Followers,
+  Following,
+  Profile,
+  Repository
+} from '../screens'
 
 function LogoTitle({ title }) {
   return (
@@ -40,6 +43,8 @@ export default function Routes() {
         options={{ headerTitle: () => <LogoTitle title="Seguidores"/> }} />
       <Stack.Screen name="Following" component={Following}
         options={{ headerTitle: () => <LogoTitle title="Seguindo"/> }} />
+      <Stack.Screen name="Repository" component={Repository}
+        options={{ headerTitle: () => <LogoTitle title="Repositório"/> }} />
     </Stack.Navigator>
   );
 }

@@ -1,0 +1,5 @@
+export { default as Main } from './Main'
+export { default as Profile } from './Profile'
+export { default as Followers } from './Followers'
+export { default as Following } from './Following'
+export { default as Repository } from './Repository'
