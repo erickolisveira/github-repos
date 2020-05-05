@@ -19,8 +19,7 @@ export default function Repository({ repo, navigation }) {
   }
 
   async function handleSelect(){
-    const repoNode = await Api.getRepoLastCommit(repo.owner.login, repo.name)
-    navigation.navigate('Repository', { repoNode, repo })
+    navigation.navigate('Repository', repo)
   }
 
   let repoColor = RepoColorPicker(repo.language)
