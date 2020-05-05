@@ -37,7 +37,7 @@ export default function Profile(props) {
         </ViewAlignLeft>
           { isLoading ? <ActivityIndicator size="large" color="black"/> 
             : repos.length === 0 ? <Text>Usuário sem repositórios</Text> 
-            : repos.map(repo => <Repository key={repo.node_id} repo={repo}/>) }
+            : repos.map(repo => <Repository key={repo.node_id} repo={repo} navigation={navigation}/>) }
       </ViewContainer>
     </ScrollViewContainer>
   )
